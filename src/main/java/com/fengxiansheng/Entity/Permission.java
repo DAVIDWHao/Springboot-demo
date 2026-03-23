@@ -1,4 +1,0 @@
-package com.fengxiansheng.Entity;
-
-public class Permission {
-}
