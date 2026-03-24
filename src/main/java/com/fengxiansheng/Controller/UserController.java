@@ -1,5 +1,6 @@
 package com.fengxiansheng.Controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fengxiansheng.Common.Result;
 import com.fengxiansheng.Entity.User;
 import com.fengxiansheng.Service.UserService;
@@ -44,6 +45,11 @@ public class UserController {
     @GetMapping()
     public  Result getall(){
         return Result.success(userService.list());
+    }
+    @GetMapping("/page")
+    public Result getbypages(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "10") Integer pageSize){
+        return Result.success(
+                userService.page(new Page<>(pageNum,pageSize)));
     }
     /*
     删除用户
