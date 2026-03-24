@@ -1,5 +1,6 @@
 package com.fengxiansheng.Controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fengxiansheng.Common.Result;
 import com.fengxiansheng.Entity.User;
@@ -47,9 +48,17 @@ public class UserController {
         return Result.success(userService.list());
     }
     @GetMapping("/page")
-    public Result getbypages(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "10") Integer pageSize){
+    public Result getbypages(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             @RequestParam String name
+                             ){
+
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        if(!"".equals(name)){
+            queryWrapper.like(User::getName,name);
+        }
         return Result.success(
-                userService.page(new Page<>(pageNum,pageSize)));
+                userService.page(new Page<>(pageNum,pageSize),queryWrapper));
     }
     /*
     删除用户
