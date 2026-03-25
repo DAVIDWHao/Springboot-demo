@@ -10,7 +10,7 @@ spring:
     password: root
   data:
     redis:
-      database: 0
+      database: 1
       host: 127.0.0.1
       port: 6379
       password:
@@ -23,3 +23,14 @@ spring:
           min-time: 0
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+sa-token:
+  token-name: satoken
+#  koken有效期
+  timeout: 259200
+  #最低活跃频率
+  active-timeout: -1
+  #是否允许同一账号多端登录
+  is-concurrent: true
+  is-share: false
+  token-style: uuid
+  is-log: true
